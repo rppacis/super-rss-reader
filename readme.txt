@@ -1,80 +1,103 @@
 === Super RSS Reader ===
 Contributors: Aakash Chakravarthy
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=donations@aakashweb.com&amp;item_name=Donate Super RSS Reader Wordpress Plugin to develop more advanced versions&amp;amount=&amp;currency_code=USD
-Tags: rss, feeds, publish, flash, embed, customizable, super, reader, sidebar, widget
+Donate link: http://bit.ly/srrdonate
+Tags: rss, feeds, widget, links, twitter, admin, plugin, feed, posts, page
 Author URI: http://www.aakashweb.com
-Plugin URI: http://aakashweb.com/wordpress-plugins/super-rss-reader/index.php
-Requires at least: 2.0.2
-Tested up to: 2.7
-Stable tag: trunk
+Plugin URI: http://www.aakashweb.com/wordpress-plugins/super-rss-reader/
+Requires at least: 2.8
+Tested up to: 3.3.x
+Stable tag: 2.0
 
-Super RSS Reader is a flash based fully customizable RSS Feeds reader with many customizing options. This RSS Feed reader works with great speed with efficiency. Number of options for changing the theme and style of the RSS Reader. 
+Super RSS Reader is an awesome RSS widget plugin, which has features like news ticker effect, tabbed RSS feeds, customizable color modes and more. 
 
 == Description ==
 
-Super RSS Reader is a flash based fully customizable RSS Feeds reader with many customizing options. This RSS Feed reader works with great speed with efficiency. No of options for changing the theme and style of the RSS Reader. 
+Super RSS Reader is jQuery based RSS reader widget, which displays the RSS feeds in the widget in an attractive way. It uses the jQuery easy ticker plugin to add a news ticker like effect to the RSS feeds. Multiple RSS feeds can be added for a single widget and they get seperated in tabs.
 
-This plugin can also be used as an widget and it can also be added to any wordpress theme and it can be arranged in your sidebar easily. 
+The plugin is fully customizable with external styles and with some inbuilt color styles. It acts as a perfect replacement for the default RSS widget in WordPress.
 
-This plugin included with an efficient admin page which allows to change each and every setting of the RSS Reader. This settings page comes out with more than 30 option to customize the RSS Reader to your needs and according to your theme. Just Change the Feed URL and the RSS Feed reader publishes the Feeds.
+[youtube=http://www.youtube.com/watch?v=02aOG_-98Tg]
 
-The admin page comes with a "jscolor" javascript to choose the color need easily. 
+= Features =
 
-Suits every Wordpress theme and recommended for all for easy and stylish publishing of RSS Feeds.
+* jQuery [news ticker like effect](http://www.aakashweb.com/jquery-plugins/easy-ticker/) to the RSS feeds (can turn off or on)
+* Tabs support, if multiple RSS feeds are added in a single widget.
+* Customizable with Inbuilt color styles and with external CSS styles.
+* Add multiple RSS feeds in a page with a ticker effect.
+* Supports RSS or atom feed.
+* Can tweak the widget to change the no of visible feed itemas and more...
 
-[Click here](http://www.aakashweb.com/super-rss-reader/customization-live.php) to see the things you can can customize in this RSS Reader Live and [click here](http://www.aakashweb.com/super-rss-reader/) to see the main introduction page of this RSS Reader
+For any bugs, post a question in [Aakash Web Forum](http://www.aakashweb.com/forum)
 
-For any bugs, post a question in [Aakash Web Forum](http://forums.aakashweb.com)
+If you like this plugin, then [just make a small donation](http://bit.ly/srrdonate) and it will be helpful for the plugin development.
 
-= Version Log =
+The jQuery ticker effect is by the "[jQuery easy ticker plugin](http://www.aakashweb.com/jquery-plugins/easy-ticker/)"
 
-0.8 - Second version with included CSS and Proxy file (loadXML.php).
-0.5 - Initial Version
+= Resources =
+
+* [Documentation](http://www.aakashweb.com/wordpress-plugins/super-rss-reader/)
+* [FAQs](http://www.aakashweb.com/faqs/wordpress-plugins/super-rss-reader/)
+* [Support](http://www.aakashweb.com/forum/)
+* [Report Bugs](http://www.aakashweb.com/forum/)
 
 == Installation ==
 
-1. Download and unzip the current version of the super-rss-reader.
-1. Transfer the entire super-rss-reader directory to your `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. That's it! You're done. 
-1. Now goto settings --> super-rss-reader and make some change to your rss reader.
-1. Then goto widgets page and add it to the sidebar.
+Download and upload the latest version of Super RSS Reader,
+
+1. Unzip & upload it to your WordPress site.
+1. Activate the plugin.
+1. Drag and drop the "Super RSS Reader" widget in the "Widgets" page.
+1. Input a RSS feed URL to the widget, tweak some settings and you are,
 1. Done !
 
 == Frequently Asked Questions ==
 
-= I want to see the customizations live where to see ? =
+= How can I customize the RSS widget externally ? =
 
-You can see it here http://www.aakashweb.com/super-rss-reader/customization-live.php
+You can use the `super-rss-reader-widget` class in your stylesheet to control the widget styling. Other classes are,
 
-= I want to add the reader somewhere else in my theme what to do ? =
+1. `srr-tab-wrap` - the tab's class.
+1. `srr-wrap` - the wrapper of the widget.
+1. `srr-item.odd` - to control the odd feed items.
+1. 'srr-item.even` - to control the even feed items.
 
-Just put the code `<?php superRSSReader (); ?>` in the theme file and you will get the reader there
+= Will the additional ticker effect slows the site ? =
 
-= Having any Q's and Bugs ? =
+No. the additional effect needs only 3.4 Kb of additional file. I think thats not too heavy to slow down the site.
 
-You can get full support in [Aakash Web forums](http://forums.aakashweb.com/) 
+= How to create a tabbed mode ? =
 
-= How can I get more help? =
+Just enter the RSS feed URLs seperated by comma in the widget, the plugin automatically renders the tab.
 
-* You can get further details in [Aakash Web -Plugins](http://www.aakashweb.com/wordpress-plugins/)
-* Or just email me to aakash.19493@gmail.com.
+For more FAQs just check out the [official page](http://www.aakashweb.com/wordpress-plugins/super-rss-reader/).
 
 == Screenshots ==
 
-1. Settings Menu.
-1. Admin Page.
-1. Admin Page - Middle Part
-1. Admin Page - Bottom Part
-1. Widget to rearrange in sidebar.
-1. Super RSS Reader in sidebar.
+1. Example Super RSS Reader widgets shown in the sidebar, having a ticker effect and a tabbed mode.
+1. Picture showing some possible ways of Customizing the widget.
+1. The Super RSS Reader widget in the administration page.
 
 [More screenshots in Aakash Web](http://www.aakashweb.com/wordpress-plugins/super-rss-reader/)
 
+== Changelog ==
+
+= 2.0 =
+* Core code is completely rewritten.
+* Flash RSS Reader is removed and instead jQuery is used.
+* Administration panel used in the previous version is removed and settings are configured in the widget itself.
+
+= 0.8 =
+* Second version with included CSS and Proxy file (loadXML.php).
+
+= 0.5 =
+* Initial version with a flash RSS Reader
+
+== Upgrade Notice ==
+
+Version 2.0 is a major and recommended upgrade for previous version users.
+
 == Credits ==
 
-Aakash Chakravarthy (email : aakash.19493@gmail.com | website : www.aakashweb.com)
-
-== Donate ==
-
-Just donate, if you like this plugin just [DONATE me securely](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=donations@aakashweb.com&amp;item_name=Donate HTML Javascript Adder Wordpress Plugin to develop more advanced versions&amp;amount=&amp;currency_code=USD) 
+* RSS feed reading engine is the inbuilt WordPress's engine
+* The news ticker effect is powered by the [jQuery Easy ticker plugin](http://www.aakashweb.com/jquery-plugins/easy-ticker/)
+* Default color styles are by Aakash Chakravarthy.
