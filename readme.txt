@@ -4,9 +4,10 @@ Donate link: http://bit.ly/srrdonate
 Tags: rss, feeds, widget, links, twitter, admin, plugin, feed, posts, page
 Author URI: http://www.aakashweb.com
 Plugin URI: http://www.aakashweb.com/wordpress-plugins/super-rss-reader/
+License: GPLv2 or later
 Requires at least: 2.8
-Tested up to: 3.3.x
-Stable tag: 2.0
+Tested up to: 3.4.1
+Stable tag: 2.1
 
 Super RSS Reader is an awesome RSS widget plugin, which has features like news ticker effect, tabbed RSS feeds, customizable color modes and more. 
 
@@ -81,6 +82,11 @@ For more FAQs just check out the [official page](http://www.aakashweb.com/wordpr
 [More screenshots in Aakash Web](http://www.aakashweb.com/wordpress-plugins/super-rss-reader/)
 
 == Changelog ==
+
+= 2.1 =
+* Added option to open links in new window.
+* Changed the method to include the scripts and styles.
+* Added a new 'Orange' color style.
 
 = 2.0 =
 * Core code is completely rewritten.

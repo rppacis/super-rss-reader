@@ -5,7 +5,7 @@ Plugin URI: http://www.aakashweb.com/wordpress-plugins/super-rss-reader/
 Author URI: http://www.aakashweb.com/
 Description: Super RSS Reader is jQuery based RSS reader widget, which displays the RSS feeds in the widget in an attractive way. It uses the jQuery easy ticker plugin to add a news ticker like effect to the RSS feeds. Multiple RSS feeds can be added for a single widget and they get seperated in tabs. <a href="http://www.youtube.com/watch?v=02aOG_-98Tg" target="_blank" title="Super RSS Reader demo video">Check out the demo video</a>.
 Author: Aakash Chakravarthy
-Version: 2.0
+Version: 2.1
 */
 
 if(!defined('WP_CONTENT_URL')) {
@@ -14,29 +14,36 @@ if(!defined('WP_CONTENT_URL')) {
 	$srr_url = WP_CONTENT_URL . '/plugins/' . plugin_basename(dirname(__FILE__)) . '/';
 }
 
-define('SRR_VERSION', '2.0');
+define('SRR_VERSION', '2.1');
 define('SRR_AUTHOR', 'Aakash Chakravarthy');
 define('SRR_URL', $srr_url);
 
-## Include the required scripts and styles
-if( !is_admin()){
+## Include the required scripts
+function srr_public_scripts(){
 	// jQuery
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"), false, '1.3.2');
-	wp_enqueue_script('jquery');
+    wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
+    wp_enqueue_script('jquery');
 	
 	// Super RSS Reader JS and CSS
 	wp_register_script('super-rss-reader-js', SRR_URL . 'public/srr-js.js');
 	wp_enqueue_script(array('jquery', 'super-rss-reader-js'));
+}
+add_action('wp_enqueue_scripts', 'srr_public_scripts');
+
+## Include the required styles
+function srr_public_styles(){
 	wp_register_style('super-rss-reader-css', SRR_URL . 'public/srr-css.css');
 	wp_enqueue_style('super-rss-reader-css');
 }
+add_action('wp_enqueue_scripts', 'srr_public_styles');
 
 ## Default color styles
 $srr_color_styles = array(
 	'No style' => 'none',
 	'Grey' => 'grey',
-	'Dark' => 'dark'
+	'Dark' => 'dark',
+	'Orange' => 'orange'
 );
 
 ## The main RSS Parser
@@ -47,6 +54,7 @@ function srr_rss_parser($instance){
 	$show_date = intval($instance['show_date']);
 	$show_desc = intval($instance['show_desc']);
 	$show_author = intval($instance['show_author']);
+	$open_newtab = intval($instance['open_newtab']);
 	$strip_desc = intval($instance['strip_desc']);
 	$color_style = stripslashes($instance['color_style']);
 	$enable_ticker = intval($instance['enable_ticker']);
@@ -138,11 +146,14 @@ function srr_rss_parser($instance){
 					$author = esc_html(strip_tags($author));
 				}
 				
+				// Open links in new tab
+				$newtab = ($open_newtab) ? ' target="_blank"' : '';
+				
 				echo "\n\n\t";
 				
 				// Display the feed items
 				echo '<div class="srr-item ' . (($j%2 == 0) ? 'even' : 'odd') . '">';
-				echo '<a href="' . $link . '" title="Posted on ' . $date . '">' .$title . '</a>';
+				echo '<a href="' . $link . '"' . $newtab . ' title="Posted on ' . $date . '">' .$title . '</a>';
 				if($show_date)		echo '<br/><em class="srr-date">' . $date . '</em>';
 				if($show_author) 	echo ' - <cite class="srr-author">' . $author . '</cite>';
 				if($show_desc) 		echo '<p class="srr-summary">' . $desc . '</p>';
@@ -204,6 +215,7 @@ class super_rss_reader_widget extends WP_Widget{
 		$instance['show_date'] = intval($new_instance['show_date']);
 		$instance['show_desc'] = intval($new_instance['show_desc']);
 		$instance['show_author'] = intval($new_instance['show_author']);
+		$instance['open_newtab'] = intval($new_instance['open_newtab']);
 		$instance['strip_desc'] = intval($new_instance['strip_desc']);
 		
 		$instance['color_style'] = stripslashes($new_instance['color_style']);
@@ -220,8 +232,8 @@ class super_rss_reader_widget extends WP_Widget{
 		$instance = wp_parse_args( (array) $instance, array(
 			'title' => '', 'urls' => '', 'count' => 5,
 			'show_date' => 0, 'show_desc' => 1, 'show_author' => 0, 
-			'strip_desc' => 100, 'color_style' => 'none', 'enable_ticker' => 1,
-			'visible_items' => 5
+			'open_newtab' => 1, 'strip_desc' => 100, 'color_style' => 'none', 
+			'enable_ticker' => 1, 'visible_items' => 5
 		));
 		
 		$title = htmlspecialchars($instance['title']);
@@ -231,6 +243,7 @@ class super_rss_reader_widget extends WP_Widget{
 		$show_date = intval($instance['show_date']);
 		$show_desc = intval($instance['show_desc']);
 		$show_author = intval($instance['show_author']);
+		$open_newtab = intval($instance['open_newtab']);
 		$strip_desc = intval($instance['strip_desc']);
 		
 		$color_style = stripslashes($instance['color_style']);
@@ -266,8 +279,7 @@ class super_rss_reader_widget extends WP_Widget{
 			<td height="32"><input id="<?php echo $this->get_field_id('show_date'); ?>" type="checkbox"  name="<?php echo $this->get_field_name('show_date'); ?>" value="1" <?php echo $show_date == "1" ? 'checked="checked"' : ""; ?> /></td>
 			<td><label for="<?php echo $this->get_field_id('show_date'); ?>">Show Date</label></td>
 			<td><label for="<?php echo $this->get_field_id('strip_desc');?>">Strip description</label></td>
-			<td><input id="<?php echo $this->get_field_id('strip_desc');?>" name="<?php echo $this->get_field_name('strip_desc'); ?>" type="text" value="<?php echo $strip_desc; ?>" class="widefat" title="Use 0 to avoid striping the description of the feed"/>
-			</td>
+			<td><input id="<?php echo $this->get_field_id('strip_desc');?>" name="<?php echo $this->get_field_name('strip_desc'); ?>" type="text" value="<?php echo $strip_desc; ?>" class="widefat" title="Use 0 to avoid striping the description of the feed"/>			</td>
 		  </tr>
 		  <tr>
 			<td height="29"><input id="<?php echo $this->get_field_id('show_author'); ?>" type="checkbox"  name="<?php echo $this->get_field_name('show_author'); ?>" value="1" <?php echo $show_author == "1" ? 'checked="checked"' : ""; ?> /></td>
@@ -275,6 +287,12 @@ class super_rss_reader_widget extends WP_Widget{
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		  </tr>
+		  <tr>
+		    <td height="29"><input id="<?php echo $this->get_field_id('open_newtab'); ?>" type="checkbox"  name="<?php echo $this->get_field_name('open_newtab'); ?>" value="1" <?php echo $open_newtab == "1" ? 'checked="checked"' : ""; ?> /></td>
+		    <td><label for="<?php echo $this->get_field_id('open_newtab'); ?>">Open links in new tab</label></td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+	      </tr>
 		</table>
 		</div>
 		

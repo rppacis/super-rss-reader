@@ -72,6 +72,31 @@
 	background: #666666!important;
 }
 
+/** Orange **/
+
+.srr-style-orange{
+	border: 2px solid #FF9900;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0px 2px 6px 0px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0px 2px 6px 0px rgba(0, 0, 0, 0.3);
+}
+.srr-style-orange .srr-item{
+	border-bottom: 1px solid #FF9900;
+}
+.srr-tab-style-orange{
+	margin: 0px 0px -1px 5px !important;
+}
+.srr-tab-style-orange li{
+	border-color: #FF9900;
+	background: #FFF8EC;
+	color: #333333 !important;
+}
+.srr-tab-style-orange .srr-active-tab{
+	background: #FF9900!important;
+	color: #FFFFFF !important;
+}
+
 /** Clearfix hack **/
 * html .srr-clearfix{
   height: 1%;
