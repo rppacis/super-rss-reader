@@ -51,6 +51,7 @@ function srr_rss_parser($instance){
 	$urls = stripslashes($instance['urls']);
 	$tab_titles = stripslashes($instance['tab_titles']);
 	$count = intval($instance['count']);
+	$instance['header_icon'] = stripslashes($new_instance['header_icon']);
 	
 	$show_date = intval($instance['show_date']);
 	$show_desc = intval($instance['show_desc']);
@@ -253,7 +254,7 @@ class super_rss_reader_widget extends WP_Widget{
 		if(empty($instance['title'])){
 			$title = '';
 		}else{
-			$title = $before_title . apply_filters('widget_title', $instance['title'], $instance, $this->id_base) . $after_title;
+			$title = $before_title . '<i class="' . $instance['header_icon'] . '"></i> ' . apply_filters('widget_title', $instance['title'], $instance, $this->id_base) . $after_title;
 		}
 		
 		echo $before_widget . $title;
@@ -275,6 +276,7 @@ class super_rss_reader_widget extends WP_Widget{
 		$instance['title'] = stripslashes($new_instance['title']);
 		$instance['urls'] = stripslashes($new_instance['urls']);
 		$instance['tab_titles'] = stripslashes($new_instance['tab_titles']);
+		$instance['header_icon'] = stripslashes($new_instance['header_icon']);
 		
 		$instance['count'] = intval($new_instance['count']);
 		$instance['show_date'] = intval($new_instance['show_date']);
@@ -300,7 +302,7 @@ class super_rss_reader_widget extends WP_Widget{
 		global $srr_color_styles;
 		
 		$instance = wp_parse_args( (array) $instance, array(
-			'title' => '', 'urls' => '', 'tab_titles' => '', 
+			'title' => '', 'urls' => '', 'tab_titles' => '', 'header_icon' => '',
 			'count' => 5, 'show_date' => 0, 'show_desc' => 1, 
 			'show_author' => 0, 'show_thumb' => 1, 'open_newtab' => 1, 
 			'strip_desc' => 100, 'read_more' => '[...]', 'rich_desc' => 0 , 
@@ -311,6 +313,7 @@ class super_rss_reader_widget extends WP_Widget{
 		$title = htmlspecialchars($instance['title']);
 		$urls = htmlspecialchars($instance['urls']);
 		$tab_titles = htmlspecialchars($instance['tab_titles']);
+		$header_icon = htmlspecialchars($instance['header_icon']);
 		
 		$count = intval($instance['count']);
 		$show_date = intval($instance['show_date']);
@@ -346,6 +349,13 @@ class super_rss_reader_widget extends WP_Widget{
 			<td><label for="<?php echo $this->get_field_id('tab_titles'); ?>">Tab titles: </label></td>
 			<td><input id="<?php echo $this->get_field_id('tab_titles');?>" name="<?php echo $this->get_field_name('tab_titles'); ?>" type="text" value="<?php echo $tab_titles; ?>" class="widefat"/>
 			<small class="srr_smalltext">Enter corresponding tab titles seperated by a comma.</small>
+			</td>
+		</tr>
+		
+		<tr>
+			<td><label for="<?php echo $this->get_field_id('header_icon'); ?>">Header icon class: </label></td>
+			<td><input id="<?php echo $this->get_field_id('header_icon');?>" name="<?php echo $this->get_field_name('header_icon'); ?>" type="text" value="<?php echo $header_icon; ?>" class="widefat"/>
+			<small class="srr_smalltext">Eg. icon-bullhorn</small>
 			</td>
 		</tr>
 		
